@@ -1,4 +1,8 @@
 // app/properties/page.tsx
+// app/properties/page.tsx
+
+export const dynamic =
+  "force-dynamic";
 
 import ClientOnly from "../components/ClientOnly";
 import EmptyState from "../components/EmptyState";

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 
 import Image from "next/image";
 import ClientOnly from "./components/ClientOnly";
@@ -7,31 +8,28 @@ import getListings, { IListingsParams } from "./actions/getListings";
 import ListingCard from "./components/listings/ListingCard";
 import getCurrentUser from "./actions/getCurrentUser";
 
-
 interface HomeProps {
   searchParams: Promise<IListingsParams>;
 }
 
 export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
-  const listing = await getListings( params );
+  const listing = await getListings(params);
   const currentUser = await getCurrentUser();
 
-
-  if(listing.length === 0){
+  if (listing.length === 0) {
     return (
       <ClientOnly>
         <EmptyState showReset />
       </ClientOnly>
-    )
+    );
   }
 
-
   return (
-      <ClientOnly>
-        <Container>
-          <div
-            className="
+    <ClientOnly>
+      <Container>
+        <div
+          className="
             pt-24
             grid
             grid-cols-1
@@ -42,18 +40,16 @@ export default async function Home({ searchParams }: HomeProps) {
             2xl:grid-cols-6
             gap-8
           "
-          >
-            {listing.map((listing: any) => (
-              <ListingCard
-                currentUser={currentUser}
-                key={listing.id}
-                data={listing}
-              />
-            ))}
-          </div>
-        </Container>
-      </ClientOnly>
-
-
+        >
+          {listing.map((listing: any) => (
+            <ListingCard
+              currentUser={currentUser}
+              key={listing.id}
+              data={listing}
+            />
+          ))}
+        </div>
+      </Container>
+    </ClientOnly>
   );
 }
