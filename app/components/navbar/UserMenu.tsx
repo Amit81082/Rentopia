@@ -36,6 +36,14 @@ const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
 
   }, [LoginModal, currentUser, rentModal])
 
+  const handleNavigate = useCallback(
+    (url: string) => {
+      setIsOpen(false);
+      router.push(url);
+    },
+    [router],
+  );
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -112,18 +120,18 @@ const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem label="Trips" onClick={() => router.push("/trips")} />
+                <MenuItem label="Trips" onClick={() => handleNavigate("/trips")} />
                 <MenuItem
                   label="Favorites"
-                  onClick={() => router.push("/favorites")}
+                  onClick={() => handleNavigate("/favorites")}
                 />
                 <MenuItem
                   label="Reservations"
-                  onClick={() => router.push("/reservations")}
+                  onClick={() => handleNavigate("/reservations")}
                 />
                 <MenuItem
                   label="Properties"
-                  onClick={() => router.push("/properties")}
+                  onClick={() => handleNavigate("/properties")}
                 />
                 <MenuItem
                   label="Rentopia my home"
