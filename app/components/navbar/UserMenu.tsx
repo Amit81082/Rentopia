@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useEffect, useRef} from "react";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
@@ -25,6 +25,8 @@ const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
   const LoginModal = useLoginModal()
   const rentModal = useRentModal()
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const onRent = useCallback(() => {
     if(!currentUser){
       return LoginModal.onOpen()
@@ -33,8 +35,23 @@ const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
     rentModal.onOpen()
 
   }, [LoginModal, currentUser, rentModal])
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <div className="relative">
+    <div ref={menuRef} className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
           onClick={onRent}
@@ -73,11 +90,11 @@ const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar src= {currentUser?.image} />
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>
-      { isOpen && (
+      {isOpen && (
         <div
           className="
             absolute
@@ -93,38 +110,35 @@ const UserMenu: React.FC<UserMenuProps> = ({currentUser}) => {
           "
         >
           <div className="flex flex-col cursor-pointer">
-              {currentUser ? (
-                <>
-                  <MenuItem
-                    label="Trips"
-                    onClick={() => router.push("/trips")}
-                  />
-                  <MenuItem
-                    label="Favorites"
-                    onClick={() => router.push("/favorites")}
-                  />
-                  <MenuItem
-                    label="Reservations"
-                    onClick={() => router.push("/reservations")}
-                  />
-                  <MenuItem
-                    label="Properties"
-                    onClick={() => router.push("/properties")}
-                  />
-                  <MenuItem
-                    label="Rentopia my home"
-                    onClick={() => rentModal.onOpen()}
-                  />
+            {currentUser ? (
+              <>
+                <MenuItem label="Trips" onClick={() => router.push("/trips")} />
+                <MenuItem
+                  label="Favorites"
+                  onClick={() => router.push("/favorites")}
+                />
+                <MenuItem
+                  label="Reservations"
+                  onClick={() => router.push("/reservations")}
+                />
+                <MenuItem
+                  label="Properties"
+                  onClick={() => router.push("/properties")}
+                />
+                <MenuItem
+                  label="Rentopia my home"
+                  onClick={() => rentModal.onOpen()}
+                />
 
-                  <hr />
-                  <MenuItem onClick={() => signOut()} label="Logout" />
-                </>
-              ) : (
-                <>
-                  <MenuItem onClick={LoginModal.onOpen} label="Login" />
-                  <MenuItem onClick={registerModal.onOpen} label="Sign up" />
-                </>
-              )}
+                <hr />
+                <MenuItem onClick={() => signOut()} label="Logout" />
+              </>
+            ) : (
+              <>
+                <MenuItem onClick={LoginModal.onOpen} label="Login" />
+                <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+              </>
+            )}
           </div>
         </div>
       )}
