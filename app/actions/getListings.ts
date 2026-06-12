@@ -25,7 +25,7 @@ export default async function getListings(params: IListingsParams = {}) {
       query.category = category;
     }
 
-    if (roomCount) {k
+    if (roomCount) {
       query.roomCount = {
         gte: +roomCount,
       };
