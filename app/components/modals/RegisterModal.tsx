@@ -40,11 +40,16 @@ const RegisterModal = () => {
 
       await axios.post("/api/register", data);
 
-      await signIn("credentials", {
-        email: data?.email,
-        password: data?.password,
-        redirect: false,
-      });
+     const callback = await signIn("credentials", {
+       email: data.email,
+       password: data.password,
+       redirect: false,
+     });
+
+     if (callback?.error) {
+       toast.error("Login failed");
+       return;
+     }
 
       toast.success("Registered!");
       registerModal.onClose();

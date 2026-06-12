@@ -88,16 +88,14 @@ const Modal = ({isOpen, onClose, onSubmit, title, body, actionLabel, footer, dis
               translate
               duration-300
               h-full
-              ${showModal ? 'translate-y-0' : 'translate-y-full'}
-              ${showModal ? 'opacity-100' : 'opacity-0'}
+              ${showModal ? "translate-y-0" : "translate-y-full"}
+              ${showModal ? "opacity-100" : "opacity-0"}
             `}
           >
             <div
               className="
                 translate
-                h-full
-                lg:h-auto
-                md:h-auto
+                max-h-full:
                 border-0
                 rounded-lg
                 shadow-lg
@@ -139,7 +137,7 @@ const Modal = ({isOpen, onClose, onSubmit, title, body, actionLabel, footer, dis
                 <div className="text-lg font-semibold">{title}</div>
               </div>
               {/* BODY */}
-              <div className="relative p-6 flex-auto">{body}</div>
+              <div className="relative p-6 flex-auto overflow-y-auto">{body}</div>
               {/* FOOTER */}
               <div className="flex flex-col gap-2 p-6">
                 <div
@@ -172,7 +170,7 @@ const Modal = ({isOpen, onClose, onSubmit, title, body, actionLabel, footer, dis
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default Modal

@@ -3,20 +3,25 @@ import React from 'react'
 import Heading from './Heading'
 import { useRouter } from 'next/navigation'
 import Button from './Button'
+import { useLoginModal } from '../hooks/useLoginModal'
 
 interface EmptyStateProps {
   title?: string
   subtitle?: string
   showReset?: boolean
+  showLogin?: boolean
 
 }
 
 const EmptyState: React.FC<EmptyStateProps> = ({
   title = "No exact matches",
   subtitle = "Try changing or removing some of your filters",
-  showReset
+  showReset,
+  showLogin
+
 }) => {
   const router = useRouter()
+  const loginModal = useLoginModal()
 
   return (
     <div
@@ -37,9 +42,14 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       <div className="w-48 mt-4">
         {showReset && (
           <Button
-            outline
             label="Remove all filters"
             onClick={() => router.push('/')}
+          />
+        )}
+        {showLogin && (
+          <Button
+            label="Login"
+            onClick={loginModal.onOpen}
           />
         )}
       </div>

@@ -13,7 +13,7 @@ const Logo = () => {
         cursor-pointer
         "
     >
-      <Image src="/images/logo2.png" width={100} height={100} alt="Logo" className="w-24 h-auto" />
+      <Image loading="eager" src="/images/logo2.png" width={100} height={100} alt="Logo" className="w-24 h-auto" />
     </div>
   );
 };

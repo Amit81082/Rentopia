@@ -14,3 +14,10 @@ body,
   z-index: 0 !important;
 }
 
+.rdrMonth{
+  width: 100% !important;
+}
+
+.rdrCalendarWrapper{
+  width: 100% !important;
+}
