@@ -8,10 +8,10 @@ A full-stack Airbnb-inspired rental platform where users can list properties, br
 
 ## Screenshots 
 
+   <img width="1349" height="636" alt="image" src="https://github.com/user-attachments/assets/d69c055e-1516-4d00-bb9b-84c605f754b8" />
     <img width="1355" height="636" alt="image" src="https://github.com/user-attachments/assets/3906f48c-84e0-4e3c-866b-d2759a3c196a" />
     <img width="1353" height="639" alt="image" src="https://github.com/user-attachments/assets/62338cbe-0274-4578-ab67-f21697c8ed0f" />
     <img width="1353" height="639" alt="image" src="https://github.com/user-attachments/assets/86c6b362-2865-4580-a07e-3adf22f60c98" />
-   <img width="1349" height="636" alt="image" src="https://github.com/user-attachments/assets/d69c055e-1516-4d00-bb9b-84c605f754b8" />
 
 
 ## ✨ Features
