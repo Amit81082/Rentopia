@@ -14,8 +14,10 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
-  const listing = await getListings(params);
-  const currentUser = await getCurrentUser();
+ const [listing, currentUser] = await Promise.all([
+   getListings(params),
+   getCurrentUser(),
+ ]);
 
   if (listing.length === 0) {
     return (

@@ -67,13 +67,14 @@ export default async function getListings(params: IListingsParams = {}) {
     }
 
 
-
+    console.time("getListings");
     const listings = await prisma.listing.findMany({
       where: query,
       orderBy: {
         createdAt: "desc",
       },
     });
+    console.timeEnd("getListings");
     return listings;
   } catch (error: any) {
     throw new Error(error);
