@@ -60,10 +60,6 @@ export const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         }
 
         router.refresh();
-
-        toast.success(
-          hasFavorited ? "Removed from favorites" : "Added to favorites",
-        );
       } catch {
         setIsFavorite(!nextValue);
         toast.error("Something went wrong");
